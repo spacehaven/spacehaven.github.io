@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: Kalam;
+    font-weight: 400;
+    font-style: normal;
+    src: url(/fonts/kalam.woff2) format("woff2"), url(/fonts/kalam.woff) format("woff")
+}
