@@ -56,37 +56,43 @@
                 <div class="container-fluid">
                     <img src="img/record.png" alt="DJ Cat" style="width:285px;">
 
-                    <h2 id="currentSong" class="current-song text-uppercase"></h2>
-                    <h3 id="currentArtist" class="current-artist text-captalize"></h3>
-                    <div class="play-pause col-12 col-md-2 text-center">
-                        <i id="playerButton" class="fa fa-play" style="font-size: 32px;margin-top: 32px;"
-                            onclick="togglePlay()"></i>
-                    </div>
+                    <h2 id="currentSong" class="hidden current-song text-uppercase"></h2>
+                    <h3 id="currentArtist" class="hidden current-artist text-captalize"></h3>
 
-                    <!-- <div class="flex flex-row volume-control">
-                        <div class="volume-icon"><i class="fa fa-volume-up"></i></div>
-                        <div class="volume-slide text-center">
-                            <input type="range" id="volume" step="1" min="0" max="100" value="80">
+
+
+                    <link href="https://hoth.alonhosting.com:1370/media/static/css/player/base.css" rel="stylesheet"
+                        type="text/css" />
+                    <link href="https://hoth.alonhosting.com:1370/media/static/css/player/style-1.css" rel="stylesheet"
+                        type="text/css" />
+                    <link href="https://hoth.alonhosting.com:1370/media/static/css/ui/jquery.ui.slider.css"
+                        rel="stylesheet" type="text/css" />
+                    <script>
+                        if (typeof jQuery == 'undefined') {
+                            var i = "i";
+                            document.write('<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></scr' + i + 'pt>');
+                        }
+                    </script>
+                    <script type="text/javascript"
+                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/jquery.jplayer.min.js"></script>
+                    <script type="text/javascript"
+                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/jquery-ui-1.10.2.custom.min.js"></script>
+                    <script type="text/javascript"
+                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/modernizr.js"></script>
+                    <script type="text/javascript"
+                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/rt_pl.js"></script>
+                    <div id="rtJpID-1"></div>
+                    <div class="rtplwrapperForIe">
+                        <div id="rtplayer-1" class="rtplmain_window gradient_style-1">
+                            <a id="button_play_stop-1" class="rtplbutton_play_stop button_play_stop_style-1"
+                                href="#"></a>
+                            <div id="current_time-1" class="rtplcurrent_time">00:00:00</div>
+                            <a id="rtplmute-1" class="rtplmute button_mute_style-1" href="#"></a>
+                            <div id="rtplvolume-1" class="rtplvolume"></div>
+                            <a id="rtplmaxvol-1" class="rtplmaxvol button_max_vol_style-1" href="#"></a>
                         </div>
-                    </div> -->
-
-                    <div class="flex flex-row">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 24 24" width="48">
-                            <path
-                                d="M18.5 12A4.5 4.5 0 0 0 16 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L9 9H6c-.55 0-1 .45-1 1z" />
-                        </svg>
-
-                        <input type="range" id="volume" step="1" min="0" max="100" value="80">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 24 24" width="48">
-                            <path
-                                d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v.2c0 .38.25.71.6.85C17.18 6.53 19 9.06 19 12s-1.82 5.47-4.4 6.5c-.36.14-.6.47-.6.85v.2c0 .63.63 1.07 1.21.85C18.6 19.11 21 15.84 21 12s-2.4-7.11-5.79-8.4c-.58-.23-1.21.22-1.21.85z" />
-                        </svg>
-
                     </div>
-                    <div class="hidden percentual-volume text-center">Volume <span id="volIndicator">...</span>%</div>
-
+                    <script>$(document).ready(function () { new RTPlayer(1, 50, false, "https://hoth.alonhosting.com:1370", "mp3", { "mp3": "https://hoth.alonhosting.com:1475/stream" }, "en") });</script>
 
                 </div>
 
@@ -140,12 +146,12 @@
 
 
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="config.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+    <!-- <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="js/script.js"></script> -->
 
 
 </body>
