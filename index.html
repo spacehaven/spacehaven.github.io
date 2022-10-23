@@ -56,8 +56,7 @@
                 <div class="container-fluid">
                     <img src="img/record.png" class="mx-auto" alt="DJ Cat" style="width:285px;">
 
-
-
+                    <!-- actual player -->
                     <link href="/css/player/base.css" rel="stylesheet" type="text/css" />
                     <link href="/css/player/style-1.css" rel="stylesheet" type="text/css" />
                     <link href="/css/ui/jquery.ui.slider.css" rel="stylesheet" type="text/css" />
@@ -87,6 +86,12 @@
                             new RTPlayer(1, 50, false, "https://hoth.alonhosting.com:1370", "mp3", { "mp3": "https://hoth.alonhosting.com:1475/stream" }, "en")
                         });
                     </script>
+                    <!-- /actual player -->
+                    <div id="now_playing_area" class="invisible mt-6 text-slate-500 text-md">
+                        <span id="now_playing_label">Now Playing: 🎵</span>
+                        <br />
+                        <span class="text-slate-700" id="now_playing"></span>
+                    </div>
 
                 </div>
 
@@ -120,12 +125,13 @@
                 <div class="mb-4">This is still a work in progess - let me know if there are any
                     problems!</div>
 
-                <div class="mb-4"><span class="font-bold">Coming soon:</span> Now-playing song title and album image,
-                    song request form, the
-                    ocassional live
-                    evening
-                    shows by Wikiwoo
-                    and I when (once we get over our head-colds!).
+                <div class="mb-4"><span class="font-bold">Coming soon:</span>
+                    <ul class="ml-4 list-disc">
+                        <li>Song request / suggest form</li>
+                        <li>My overnight insane songs playlist</li>
+                        <li>Sunday morning devotional music and messages</li>
+                        <li>Ocassional live evening shows with Wikiwoo and I (once we get over our head-colds!) </li>
+                    </ul>
                 </div>
 
                 <div><i>Welcome SIM Family!</i></div>
