@@ -40,6 +40,43 @@ RTPlayer.prototype = {
         return pad(h) + ":" + pad(m) + ":" + pad(s);
     },
 
+    update_meta: function (w) {
+        console.log("Querying for meta...")
+        $.getJSON("https://hoth.alonhosting.com:1475/status-json.xsl", function (data) {
+            // I haven't coded js in over 7 months... Don't judge me
+            if (data && data.icestats && data.icestats.source && data.icestats.source.title) {
+
+
+                var title = data.icestats.source.title;
+                if (title.includes("Unknown Artist - ")) {
+                    title = "Sunny Bungalow Radio"
+                }
+
+                // little hack to delay the title by ~5 sec because 
+                // Really I need a 3-4 element buffer since the stream is like 15 seconds behind, but..
+                var delayed_title = w.delayed_title || title;
+                w.delayed_title = title
+                title = delayed_title
+
+                if ($("#now_playing_area").hasClass("invisible")) {
+                    $("#now_playing_area").removeClass("invisible");
+                }
+                console.log("Currently playing: ", title);
+                $("#now_playing").text(title);
+
+                if ($("#now_playing_label").text().includes("🎶")) {
+                    $("#now_playing_label").text("Now Playing: 🎵")
+                } else {
+                    $("#now_playing_label").text("Now Playing: 🎶")
+                }
+
+                document.title = "";
+                document.title = "Sunny Bungalow Radio - " + title;
+
+            }
+        });
+    },
+
     reconnect: function () {
         var $p = $("#rtJpID-" + this.ch_id);
         this.timer_time = 0;
@@ -62,22 +99,22 @@ RTPlayer.prototype = {
                 if (w.autoplay) {
                     if (!w.isMobile) {
                         var audio = $("#rtJpID-" + w.ch_id).find("audio");
-                        if(audio.length){
+                        if (audio.length) {
                             audio = audio[0];
                             var playPromise = audio.play();
                             if (playPromise !== undefined) {
-                                playPromise.then(function() {
+                                playPromise.then(function () {
                                     // Automatic playback started!
                                     console.log("Autoplay is supported");
                                     $("#rtJpID-" + w.ch_id).jPlayer("clearMedia");
                                     $('#button_play_stop-' + w.ch_id).trigger('click');
-                                }).catch(function(error) {
+                                }).catch(function (error) {
                                     // Automatic playback failed.
                                     // Show a UI element to let the user manually start playback.
                                     console.log("Autoplay is not supported");
                                 });
                             }
-                            else{
+                            else {
                                 $("#rtJpID-" + w.ch_id).jPlayer("clearMedia");
                             }
                         }
@@ -89,7 +126,7 @@ RTPlayer.prototype = {
             wmode: "window",
             preload: "none",
             solution: 'html, flash',
-	        volume: w.vol / 100,
+            volume: w.vol / 100,
             play: function (e) {
                 ///console.log("play");
             },
@@ -101,6 +138,14 @@ RTPlayer.prototype = {
                     w.timer_time += 1;
                     $("#current_time-" + w.ch_id).html(w._formatTime(w.timer_time));
                 }, 1000);
+
+                // Start polling for meta stuff
+                clearInterval(w.meta_timer_handle);
+                w.meta_timer_handle = setInterval(function () {
+                    w.update_meta(w);
+                }, 5000);
+                //
+
                 clearInterval(w.reconnect_timer_handle);
                 delete w.reconnect_timer_handle;
                 this.play_started = true;
@@ -148,6 +193,17 @@ RTPlayer.prototype = {
                 else if (w.ready) {
                     $("#current_time-" + w.ch_id).html(w.errorText);
                     clearInterval(w.timer_handle);
+                    // Clear title
+                    clearInterval(w.meta_timer_handle);
+                    if (!$("#now_playing_area").hasClass("invisible")) {
+                        $("#now_playing_area").addClass("invisible");
+
+                    }
+
+                    document.title = "";
+                    document.title = "Sunny Bungalow Radio"
+                    //
+
                 }
             }
         });
@@ -193,11 +249,11 @@ RTPlayer.prototype = {
 
                 var a = w.stream[w.format].split("//");
                 //if(a.length > 1){
-                    //var stream_protocol = a[0];
-                    //if(location.protocol == "https" && stream_protocol != 'https'){
-                    //    alert(w.errorSSL);
-                    //    return;
-                    //}
+                //var stream_protocol = a[0];
+                //if(location.protocol == "https" && stream_protocol != 'https'){
+                //    alert(w.errorSSL);
+                //    return;
+                //}
                 //}
                 // Stop all other players
                 $("[id^=rtJpID-]").each(function (idx, element) {
@@ -215,6 +271,18 @@ RTPlayer.prototype = {
             else {
                 $("#button_play_stop-" + w.ch_id).removeClass('active');
                 clearInterval(w.timer_handle);
+
+                // Clear title
+                clearInterval(w.meta_timer_handle);
+                if (!$("#now_playing_area").hasClass("invisible")) {
+                    $("#now_playing_area").addClass("invisible");
+                }
+
+                document.title = "";
+                document.title = "Sunny Bungalow Radio";
+                //
+
+
                 $("#rtJpID-" + w.ch_id).jPlayer("stop");
                 $("#current_time-" + w.ch_id).html('00:00:00');
                 w.timer_time = 0;
