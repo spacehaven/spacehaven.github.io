@@ -12,8 +12,8 @@ var settings = {
     'radio_name': 'Sunny Bungalow',
 
     // URL of streaming without / on the final, eg: http://streaming.com:8080
-    'url_streaming': ' http://centova.alonhosting.com:8012/stream?type=http&nocache=24',
-
+    // 'url_streaming': ' http://centova.alonhosting.com:8012/stream?type=http&nocache=24',
+    'url_streaming': 'https://hoth.alonhosting.com:1475/stream?type=http&nocache=25',
     // When choosing icecast, make sure the file 'player.log' in the document root is writeable.
     // Choose between 'shoutcast' or 'icecast'
     'streaming_type': 'icecast',
