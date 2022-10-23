@@ -242,6 +242,7 @@ function Page () {
     //     }
 }
 
+console.log("Opening URL_STREAMING: ", URL_STREAMING);
 var audio = new Audio(URL_STREAMING);
 
 // Player control
