@@ -1,0 +1,59 @@
+/*
+ *  Этот файл поставляется в составе HTML5 плеера и разработан в рамках портала Radio-Tochka.com
+ *  Copyright (C) 2013 Radio-Tochka.com <info@radio-tochka.com>
+ *  Все права защищены. Не удаляйте этот копирайт.
+*/
+.gradient_style-1 {
+	/* Legacy browsers */
+	/*background: #69694f url("gradient_style-1-bg.png") repeat-x top;*/
+	background: #69694f;
+	-o-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+
+	/* Internet Explorer */
+	*background: #69694f;
+	background: #69694f\0/;
+
+	filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr=#ffbebe98, endColorstr=#ff69694f);
+	/* Recent browsers */
+	background-image: -webkit-gradient(linear,
+			left top, left bottom,
+			from(rgba(190, 190, 152, 1)),
+			to(rgba(105, 105, 79, 1)));
+	background-image: -webkit-linear-gradient(top,
+			rgba(190, 190, 152, 1),
+			rgba(105, 105, 79, 1));
+	background-image: -moz-linear-gradient(top,
+			rgba(190, 190, 152, 1),
+			rgba(105, 105, 79, 1));
+	background-image: -ms-linear-gradient(top,
+			rgba(190, 190, 152, 1),
+			rgba(105, 105, 79, 1));
+	background-image: -o-linear-gradient(top,
+			rgba(190, 190, 152, 1),
+			rgba(105, 105, 79, 1));
+	background-image: linear-gradient(top,
+			rgba(190, 190, 152, 1),
+			rgba(105, 105, 79, 1));
+	border: 1px solid #3E5E6F;
+}
+
+
+.button_play_stop_style-1 {
+	background-image: url(/img/style_1.png);
+	background-repeat: no-repeat;
+	background-position: -65px 16px;
+}
+
+
+
+
+.button_max_vol_style-1 {
+	background-image: url(/img/style_1.png);
+}
+
+.button_mute_style-1 {
+	background-image: url(/img/style_1.png);
+}

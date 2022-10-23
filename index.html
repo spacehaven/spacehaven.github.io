@@ -58,26 +58,19 @@
 
 
 
-                    <link href="https://hoth.alonhosting.com:1370/media/static/css/player/base.css" rel="stylesheet"
-                        type="text/css" />
-                    <link href="https://hoth.alonhosting.com:1370/media/static/css/player/style-1.css" rel="stylesheet"
-                        type="text/css" />
-                    <link href="https://hoth.alonhosting.com:1370/media/static/css/ui/jquery.ui.slider.css"
-                        rel="stylesheet" type="text/css" />
+                    <link href="/css/player/base.css" rel="stylesheet" type="text/css" />
+                    <link href="/css/player/style-1.css" rel="stylesheet" type="text/css" />
+                    <link href="/css/ui/jquery.ui.slider.css" rel="stylesheet" type="text/css" />
                     <script>
                         if (typeof jQuery == 'undefined') {
                             var i = "i";
                             document.write('<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></scr' + i + 'pt>');
                         }
                     </script>
-                    <script type="text/javascript"
-                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/jquery.jplayer.min.js"></script>
-                    <script type="text/javascript"
-                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/jquery-ui-1.10.2.custom.min.js"></script>
-                    <script type="text/javascript"
-                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/modernizr.js"></script>
-                    <script type="text/javascript"
-                        src="https://hoth.alonhosting.com:1370/media/static/js/jplayer/rt_pl.js"></script>
+                    <script type="text/javascript" src="/js/jplayer/jquery.jplayer.min.js"></script>
+                    <script type="text/javascript" src="/js/jplayer/jquery-ui-1.10.2.custom.min.js"></script>
+                    <script type="text/javascript" src="/js/jplayer/modernizr.js"></script>
+                    <script type="text/javascript" src="/js/player/rt_pl.js"></script>
                     <div id="rtJpID-1"></div>
                     <div class="rtplwrapperForIe">
                         <div id="rtplayer-1" class="rtplmain_window gradient_style-1">
@@ -89,7 +82,11 @@
                             <a id="rtplmaxvol-1" class="rtplmaxvol button_max_vol_style-1" href="#"></a>
                         </div>
                     </div>
-                    <script>$(document).ready(function () { new RTPlayer(1, 50, false, "https://hoth.alonhosting.com:1370", "mp3", { "mp3": "https://hoth.alonhosting.com:1475/stream" }, "en") });</script>
+                    <script>
+                        $(document).ready(function () {
+                            new RTPlayer(1, 50, false, "https://hoth.alonhosting.com:1370", "mp3", { "mp3": "https://hoth.alonhosting.com:1475/stream" }, "en")
+                        });
+                    </script>
 
                 </div>
 
