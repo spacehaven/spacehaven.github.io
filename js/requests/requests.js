@@ -163,6 +163,8 @@ function request_submit () {
     var data = {
         request_song_id: request_song_id,
         request_name: request_name,
+        request_song_artist: request_song_artist,
+        request_song_title: request_song_title,
         msg: msg
     }
 
