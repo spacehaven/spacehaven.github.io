@@ -78,6 +78,12 @@ function display_results () {
         html += "<button " + enabled_btn_class + " type=button onclick='current_page++; display_results();' class='text-blue-900'>Next</button>";
     }
     html += "</div>"
+
+    html += "<hr class='mb-2 mt-4'/>"
+
+    html += "<div class='mb-2'><a class='text-blue-800 hover:underline' href='#' onclick='display_suggest(); return false;'>Don't see the song you want? Click here!</a></div>";
+
+
     $("#search_results").html(html)
 }
 
@@ -102,8 +108,8 @@ function select (i) {
     html += "<div class='mb-2 text-orange-800' style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;'>" + request_song_artist + " - " + request_song_title + "</div>"
     html += "<div class='mb-2 font-bold'>Tell me:</div>"
 
-    html += "<form type='submit' action='javascript: void(0);'>";
-    html += "<input id='who' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='Your name'></input>"
+    html += "<form id='form_request' type='submit' action='javascript: void(0);'>";
+    html += "<input id='who' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='Your (Telegram) name'></input>"
     html += "<input id='when' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='When you want to hear it (example: 8pm)'></input>"
     html += "<input id='tz' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='Your timezone (example: Pacific)'></input>"
 
@@ -174,6 +180,10 @@ function request_submit () {
             .removeClass('bg-blue-500')
             .addClass('bg-slate-300')
 
+        $('#form_request input').css('background-color', '#dddddd');
+        $('#form_request input').prop('disabled', 'true');
+
+
         $("#submit_status").text("Sending...")
         $.post("https://docker-api.cheshirezine.com/api/request", data)
             .done(function () {
@@ -223,6 +233,107 @@ function search () {
     });
     console.log("Searching for: " + txt);
 }
+
+
+// Suggest
+
+function display_suggest () {
+    var html = "";
+
+    html += "<hr class='mb-2'/>"
+
+    html += "<div class='mb-2'>< <a class='text-blue-800 hover:underline' href='#' onclick='display_results(); return false;'>Back</a></div>";
+
+    html += "<div class='font-bold mb-2 text-orange-800'>Suggest a song to be added!</div>"
+    html += "<div class='mb-2 font-bold'>Tell me:</div>"
+
+    html += "<form id='form_suggest' type='submit' action='javascript: void(0);'>";
+    html += "<input id='who' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='Your (Telegram) name'></input>"
+    html += "<input id='artist' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='Song Artist/Band'></input>"
+    html += "<input id='title' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='Song Name'></input>"
+    html += "<input id='special' class='w-full border-2 border-gray-300 bg-white h-10 px-5 pr-12 mb-2 rounded-sm text-sm focus:outline-none' class='' placeholder='Special features (live, extended..)'></input>"
+
+    var enabled_btn_class = "class='bg-blue-500 mt-2 mb-2 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded'";
+    html += "<button id='request_button' " + enabled_btn_class + " type=button onclick='suggest_submit();' class='text-blue-900'>Submit Suggestion</button>";
+
+    html += "<div id='submit_status'></div>";
+
+    html += "</form>"
+
+    $("#search_results").html(html)
+}
+
+
+function validate_suggest () {
+    $("#who").removeClass('border-red-800')
+    $("#artist").removeClass('border-red-800')
+    $("#title").removeClass('border-red-800')
+    $("#who").addClass('border-gray-300')
+    $("#artist").addClass('border-gray-300')
+    $("#title").addClass('border-gray-300')
+
+    var found_error = false;
+    if (!$("#who").val()) {
+        $("#who").addClass('border-red-800')
+        found_error = true;
+    }
+    if (!$("#artist").val()) {
+        $("#artist").addClass('border-red-800')
+        found_error = true;
+    }
+    if (!$("#title").val()) {
+        $("#title").addClass('border-red-800')
+        found_error = true;
+    }
+
+    if (found_error) {
+        $("#submit_status").addClass("text-red-700")
+        $("#submit_status").text("We need a little more info")
+        return false;
+    }
+
+    return true
+}
+
+function suggest_submit () {
+
+    var request_name = $("#who").val();
+    var request_artist = $("#artist").val();
+    var request_title = $("#title").val();
+    var request_special = $("#special").val();
+
+    console.log("Posting request: ", request_name, request_artist, request_title, request_special)
+
+    var data = {
+        request_name: request_name,
+        request_artist: request_artist,
+        request_title: request_title,
+        request_special: request_special
+    }
+
+    if (validate_suggest()) {
+        $("#request_button").prop("disabled", true)
+            .removeClass('hover:bg-blue-700')
+            .removeClass('bg-blue-500')
+            .addClass('bg-slate-300')
+        $('#form_suggest input').css('background-color', '#dddddd');
+        $('#form_suggest input').prop('disabled', 'true');
+
+        $("#submit_status").text("Sending...")
+        $.post("https://docker-api.cheshirezine.com/api/suggest", data)
+            .done(function () {
+                $("#submit_status").addClass("text-green-700").addClass('font-bold')
+                $("#submit_status").text("Success! We'll look for it and add it to the library!")
+            }).fail(function (response) {
+                console.log("Error: ", response)
+                $("#submit_status").addClass("text-red-700").addClass('font-bold')
+                $("#submit_status").text("Oh no. Something went wrong. If you don't mind, can you send Jon Jon this message in the Sunny Bungalow Chat: '" + response.responseText + "'")
+            });
+    }
+
+
+}
+
 
 
 function truncate (str, n) {
