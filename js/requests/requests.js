@@ -81,7 +81,7 @@ function display_results () {
 
     html += "<hr class='mb-2 mt-4'/>"
 
-    html += "<div class='mb-2'><a class='text-blue-800 hover:underline' href='#' onclick='display_suggest(); return false;'>Don't see the song you want? Click here!</a></div>";
+    html += "<div class='mb-2'><a class='text-blue-800 hover:underline' href='#' onclick='display_suggest(); return false;'>Don't see the song you want? <b>Click here!</b></a></div>";
 
 
     $("#search_results").html(html)
