@@ -20,7 +20,7 @@ function init_requests () {
 function request_test () {
     console.log("request_test");
     $("#server_status").text("Checking");
-    $.getJSON("http://api2.wikiwoosoaps.com/api/test", function (data) {
+    $.getJSON("https://api2.wikiwoosoaps.com/api/test", function (data) {
         var status = "Bad"
         console.log(data);
         if (data && data.status) {
@@ -185,7 +185,7 @@ function request_submit () {
 
 
         $("#submit_status").text("Sending...")
-        $.post("http://api2.wikiwoosoaps.com/api/request", data)
+        $.post("https://api2.wikiwoosoaps.com/api/request", data)
             .done(function () {
                 $("#submit_status").addClass("text-green-700").addClass('font-bold')
                 $("#submit_status").text("Success! We'll do our thing!")
@@ -202,7 +202,7 @@ function request_submit () {
 function search () {
     var txt = $("#input_search").val();
     //    $("#server_status").text("Searching for: " + txt);
-    $.getJSON("http://api2.wikiwoosoaps.com/api/search?q=" + encodeURI(txt), function (data) {
+    $.getJSON("https://api2.wikiwoosoaps.com/api/search?q=" + encodeURI(txt), function (data) {
         var status = "Bad"
         console.log(data);
         if (data && data.status) {
@@ -320,7 +320,7 @@ function suggest_submit () {
         $('#form_suggest input').prop('disabled', 'true');
 
         $("#submit_status").text("Sending...")
-        $.post("http://api2.wikiwoosoaps.com/api/suggest", data)
+        $.post("https://api2.wikiwoosoaps.com/api/suggest", data)
             .done(function () {
                 $("#submit_status").addClass("text-green-700").addClass('font-bold')
                 $("#submit_status").text("Success! We'll look for it and add it to the library!")
