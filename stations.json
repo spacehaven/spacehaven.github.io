@@ -1,6 +1,10 @@
-[  {"Sunny Bungalow",    "https://hoth.alonhosting.com:1475/stream"},
-  {"Jazz 24", "https://knkx-live-a.edge.audiocdn.com/6285_128k"},
-  {"Groove Salad", "https://ice4.somafm.com/groovesalad-128-mp3"},
-  {"Awesome 80s", "https://listen.181fm.com/181-awesome80s_128k.mp3"},
-  {"Good Times 60s/70s", "https://listen.181fm.com/181-goodtime_128k.mp3"}
+[  {"Sunny Bungalow":   "https://hoth.alonhosting.com:1475/stream"},
+  {"Jazz 24": "https://knkx-live-a.edge.audiocdn.com/6285_128k"},
+  {"Groove Salad": "https://ice4.somafm.com/groovesalad-128-mp3"},
+  {"Awesome 80s": "https://listen.181fm.com/181-awesome80s_128k.mp3"},
+  {"Good Times 60s/70s": "https://listen.181fm.com/181-goodtime_128k.mp3"},
+  {"Disco Diamond":   "https://discodiamond.radioca.st/autodj"},
+  {"Radio King":    "https://listen.radioking.com/radio/175279/stream/216784"},
+  {"Radio Caroline":  "http://sc6.radiocaroline.net:8040/stream"},
+  {"WGMC Jazz":    "http://greece-media.monroe.edu/wgmc.mp3"}
 ]
